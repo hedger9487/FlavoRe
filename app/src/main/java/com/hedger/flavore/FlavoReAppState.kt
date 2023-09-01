@@ -1,10 +1,14 @@
 package com.hedger.flavore
 
+import android.content.res.Resources
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import kotlinx.coroutines.CoroutineScope
 
 class FlavoReAppState(
-    val navController: NavHostController
+    val navController: NavHostController,
+    private val resources: Resources,
+    coroutineScope: CoroutineScope
 ) {
     fun popUp(){
         navController.popBackStack()
