@@ -4,9 +4,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hedger.flavore.LOGIN_SCREEN
+import com.hedger.flavore.R
 import com.hedger.flavore.SETTINGS_SCREEN
 import com.hedger.flavore.common.ext.isValidEmail
+import com.hedger.flavore.common.snackbar.SnackbarManager
 import com.hedger.flavore.model.service.AccountService
+import com.hedger.flavore.model.service.LogService
+import com.hedger.flavore.ui.screens.FlavoReViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val accountService: AccountService,
-): ViewModel() {
+    logService: LogService
+): FlavoReViewModel(logService) {
 
     //using mutableStateOf in viewmodel to manage states
     //the screen composable can directly use by to delegate,
@@ -48,11 +53,12 @@ class LoginViewModel @Inject constructor(
             // todo: log messages and modify the function to check password
         }
 
-        viewModelScope.launch {
-            //not sure to add await or not, sample code has no await,
-            //maybe need to await the result, then depends on the result to navigate
-            accountService.authenticate(email,password)
-            openAndPopUp(SETTINGS_SCREEN, LOGIN_SCREEN)
+
+        //not sure to add await or not, sample code has no await,
+        //maybe need to await the result, then depends on the result to navigate
+        launchCatching {
+            accountService.sendRecoveryEmail(email)
+            SnackbarManager.showMessage(R.string.recovery_email_sent)
         }
     }
 

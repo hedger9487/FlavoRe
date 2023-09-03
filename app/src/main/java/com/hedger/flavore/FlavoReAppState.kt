@@ -1,11 +1,13 @@
 package com.hedger.flavore
 
 import android.content.res.Resources
+import androidx.compose.material.ScaffoldState
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.CoroutineScope
 
 class FlavoReAppState(
+    val scaffoldState: ScaffoldState,
     val navController: NavHostController,
     private val resources: Resources,
     coroutineScope: CoroutineScope

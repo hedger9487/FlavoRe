@@ -41,6 +41,7 @@ fun SplashScreen(
     // seems launching a coroutine for compose
     LaunchedEffect(true) {
         delay(SPLASH_TIMEOUT)
+        //viewModel decide where to navigate
         viewModel.onAppStart(openAndPopUp)
     }
 

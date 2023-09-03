@@ -11,5 +11,8 @@
     <!-- Common -->
     <string name="generic_error">Something wrong happened. Please try again.</string>
     <string name="try_again">Try again</string>
+    <string name="recovery_email_sent">Recovery Email</string>
+    <string name="distance">Distance</string>
+    <string name="address">Address</string>
 
 </resources>
